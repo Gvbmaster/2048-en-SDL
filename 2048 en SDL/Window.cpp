@@ -71,13 +71,10 @@ void Window::loadBmpImg() {
 
 
 Window::Window() {
-    // Initialise SDL
     SDL_Init(SDL_INIT_VIDEO);
 
-    // Créez la fenêtre SDL
     window = SDL_CreateWindow("2048", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 800, SDL_WINDOW_SHOWN);
 
-    // Créez le rendu SDL
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
 

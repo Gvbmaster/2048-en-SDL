@@ -3,12 +3,10 @@
 
 class Case{
 public:
-    Case(SDL_Renderer* renderer, int x, int y, int width, int height); 
+    Case(); 
 
     int getValue() const;
     void setValue(int newValue);
-    void render(); 
-    void loadBMPImg();
     bool isEmpty() const;
 
 private:
