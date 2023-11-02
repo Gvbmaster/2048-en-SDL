@@ -1,20 +1,65 @@
-// 2048 en SDL.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
-//
+#include "SDL.h"
+#include "Window.h"
+#include "GameObject.h"
+#include "Grid.h"
 
-#include <iostream>
+int main(int argc, char* argv[]) {
+    // Initialisez SDL et créez une fenêtre
+    SDL_Init(SDL_INIT_VIDEO);
+    Window window("2048", 800, 600);
 
-int main()
-{
-    std::cout << "Hello World!\n";
-}
+    // Initialisez la grille de jeu
+    Grid grid;
+    grid.initializeGrid();
+    grid.generateRandomTile();
+    grid.generateRandomTile();
 
-// Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
-// Déboguer le programme : F5 ou menu Déboguer > Démarrer le débogage
+    // Créez un GameObject pour afficher la grille
+    GameObject gameGrid(window.getRenderer(), "grid.png", x, y, width, height);
 
-// Astuces pour bien démarrer : 
-//   1. Utilisez la fenêtre Explorateur de solutions pour ajouter des fichiers et les gérer.
-//   2. Utilisez la fenêtre Team Explorer pour vous connecter au contrôle de code source.
-//   3. Utilisez la fenêtre Sortie pour voir la sortie de la génération et d'autres messages.
-//   4. Utilisez la fenêtre Liste d'erreurs pour voir les erreurs.
-//   5. Accédez à Projet > Ajouter un nouvel élément pour créer des fichiers de code, ou à Projet > Ajouter un élément existant pour ajouter des fichiers de code existants au projet.
-//   6. Pour rouvrir ce projet plus tard, accédez à Fichier > Ouvrir > Projet et sélectionnez le fichier .sln.
+    // Boucle de jeu principale
+    bool quit = false;
+    SDL_Event event;
+    while (!quit) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                quit = true;
+            }
+            else if (event.type == SDL_KEYDOWN) {
+                switch (event.key.keysym.sym) {
+                case SDLK_UP:
+                    grid.moveTilesUp();
+                    // Vérifiez les conditions de victoire ou de défaite ici
+                    // ...
+                    break;
+                case SDLK_DOWN:
+                    grid.moveTilesDown();
+                    // Vérifiez les conditions de victoire ou de défaite ici
+                    // ...
+                    break;
+                case SDLK_LEFT:
+                    grid.moveTilesLeft();
+                    // Vérifiez les conditions de victoire ou de défaite ici
+                    // ...
+                    break;
+                case SDLK_RIGHT:
+                    grid.moveTilesRight();
+                    // Vérifiez les conditions de victoire ou de défaite ici
+                    // ...
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+
+        // Effacez l'écran
+        window.clear();
+
+        // Affichez la grille de jeu
+        gameGrid.render();
+
+        // Mettez à jour l'affichage
+        window.render();
+    }
+
