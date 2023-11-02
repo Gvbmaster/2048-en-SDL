@@ -3,15 +3,16 @@
 
 class Case{
 public:
-    Case(SDL_Renderer* renderer, int x, int y, int width, int height); // Constructeur
+    Case(SDL_Renderer* renderer, int x, int y, int width, int height); 
 
     int getValue() const;
     void setValue(int newValue);
-    void render(); // Méthode pour afficher la case
+    void render(); 
+    void loadBMPImg();
     bool isEmpty() const;
 
 private:
     SDL_Renderer* renderer; //rendu SDL
     int value;
-    SDL_Rect rect; // Rectangle pour l'emplacement et la taille de la case
+    SDL_Rect rect; 
 };

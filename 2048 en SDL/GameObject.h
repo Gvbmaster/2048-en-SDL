@@ -1,16 +1,13 @@
 #pragma once
 #include <SDL.h>
 
-class GameObject {
+class GameObject
+{
+
 public:
-    GameObject(SDL_Renderer* renderer, const char* imagePath, int x, int y, int width, int height); //constructeur
-    ~GameObject(); //destructeur
 
-    void render();
+    GameObject();
 
+    void copyRenderer(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect rect);
 
-private:
-    SDL_Renderer* renderer;
-    SDL_Texture* texture;
-    SDL_Rect rect;
 };
