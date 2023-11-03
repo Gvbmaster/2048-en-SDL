@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
     grid.generateRandomTile();
 
     // Créez un GameObject pour afficher la grille
-    GameObject gameGrid(window.getRenderer(), "grid.png", x, y, width, height);
+    GameObject gameGrid(window.getRenderer(), "img/board.png", 0, 0, 800, 600);
 
     // Boucle de jeu principale
     bool quit = false;
@@ -62,4 +62,6 @@ int main(int argc, char* argv[]) {
         // Mettez à jour l'affichage
         window.render();
     }
+    return 0;
+}
 
