@@ -17,4 +17,5 @@ public:
     void moveTilesLeft();
     void winCondition();
     void loseCondition();
+    int getTileValue(int row, int col) const;
 };

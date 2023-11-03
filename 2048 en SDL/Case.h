@@ -1,16 +1,14 @@
 #pragma once
-#include "SDL.h"
+class Case {
 
-class Case{
+private:
+    int value; // Valeur de la case (0 pour une case vide, sinon une puissance de 2)
+
 public:
-    Case(); 
-
+    Case();
     int getValue() const;
     void setValue(int newValue);
     bool isEmpty() const;
 
-private:
-    SDL_Renderer* renderer; //rendu SDL
-    int value;
-    SDL_Rect rect; 
 };
+

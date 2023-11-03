@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 
 using namespace std;
 
@@ -47,15 +48,28 @@ void Grid::displayGrid() {
 }
 
 void Grid::generateRandomTile() {
-    int randomValue = std::rand() % 2 == 0 ? 2 : 4;
+    // Liste des cellules vides
+    std::vector<std::pair<int, int>> emptyCells;
 
-    int emptyRow, emptyCol;
-    do {
-        emptyRow = std::rand() % SIZE;
-        emptyCol = std::rand() % SIZE;
-    } while (!grid[emptyRow][emptyCol].isEmpty());
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            if (grid[i][j].isEmpty()) {
+                emptyCells.push_back(std::make_pair(i, j));
+            }
+        }
+    }
 
-    grid[emptyRow][emptyCol].setValue(randomValue);
+    // Si des cellules vides existent
+    if (!emptyCells.empty()) {
+        // Sélectionnez une cellule vide aléatoirement
+        int randomIndex = std::rand() % emptyCells.size();
+        int selectedRow = emptyCells[randomIndex].first;
+        int selectedCol = emptyCells[randomIndex].second;
+
+        // Définissez la valeur de la cellule sélectionnée comme 2 ou 4 (50% de chances)
+        int randomValue = (std::rand() % 2 == 0) ? 2 : 4;
+        grid[selectedRow][selectedCol].setValue(randomValue);
+    }
 }
 
 void Grid::winCondition() {
@@ -173,5 +187,15 @@ void Grid::moveTilesLeft() {
                 }
             }
         }
+    }
+}
+
+int Grid::getTileValue(int col, int row) const {
+    if (row >= 0 && row < SIZE && col >= 0 && col < SIZE) {
+        return grid[row][col].getValue();
+    }
+    else {
+        // Gérez les coordonnées invalides, par exemple, retournez -1 ou une valeur par défaut.
+        return 0; // Remplacez -1 par la valeur par défaut souhaitée.
     }
 }
